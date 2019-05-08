@@ -23,8 +23,10 @@ class BlogController extends AbstractController
     public function show($variable)
     {
       
+       $variable = ucwords($variable, "-");
+        $var = str_replace("-"," ",$variable);
         return $this->render('blog/show.html.twig', [
-            'slug' => $variable = ucwords($variable,"-"),
+            'slug' => $var ,
             
         ]);
     }
