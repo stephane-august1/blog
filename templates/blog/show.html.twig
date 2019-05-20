@@ -4,4 +4,10 @@
 
 {% block body %}
 <h1>{{ slug }}</h1>
+{{ dump(article)}}
+{% for article in article %}
+titre {{ article.title }} | id : {{ article.id }}<br>
+categorie n°{{ article.category.id}} titre : {{ article.category.title}} <br>
+{% endfor %}
+
 {% endblock %}

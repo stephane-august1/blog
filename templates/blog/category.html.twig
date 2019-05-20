@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Category{% endblock %}
+
+{% block body %}
+variable category : {{dump(category)}}
+
+<h1>la categorie</h1>
+
+{{category}}
+
+<h1>les articles</h1>
+
+  {% for articles in article %}{% if category %}
+Article N° : {{ articles.id }} | title :{{ articles.title }} <br>
+Content :<br>
+{{ articles.content }} | Category {{ articles.category.id}} name {{ articles.category.title }}<br>{% endif %}
+{% endfor %}
+ 
+
+{% endblock %}

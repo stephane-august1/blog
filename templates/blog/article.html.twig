@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+ <link rel="stylesheet" href="{{asset('/build/css/perso/stylearticle.css')}}">
+ {% for article in articles %}
+    <section>
+      <div class="articles">
+                <hr>
+               <h2>{{'TITLE_ARTICLE'| trans | raw}}</h2> <h2>{{ article.title }}</h2>
+                <hr>
+         <div class="metadata"> 
+            {{'WRITE_ON'| trans | raw}}
+            {{ article.createdAt | date('d/m/Y')}}
+                    à {{ article.createdAt | date('H:i')}} {{'IN_CATEGORIES'| trans | raw}}:{{article.category.title| trans | raw}}
+                                <hr position="float:left;" style="width:50%;"></div>
+                                <div class="content">
+                                    <img src="{{ article.image }}" alt="img article">
+                                        <img alt="img deco" height="145px" src="/build/img/aubergine.png" width="190px">
+                                            {{article.content | raw }}
+                                            <a href="{{path('show',{'id':article.id})}}" class="btn-primary">
+                                                {{'BTN_SHOW_NEXT'| trans | raw}}</a>
+                                               
+                                     
+                                    </div>
+                                </div>
+                            </section>
+                        {% endfor %}
+                    {% endblock %}
