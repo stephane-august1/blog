@@ -6,8 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use App\Repository\CategoryRepository;
 
 class BlogController extends AbstractController
 {
@@ -62,13 +60,19 @@ class BlogController extends AbstractController
     * @Route("/category/{categoryName}",name="category")
     */
     
-    public function showByCategory($categoryName)
-    {
-      
-        $cat = $this->getDoctrine()->getRepository(Category::class)->findOneby(['title'=> $categoryName]);
-        $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(array('category' => $cat), array('id' => 'DESC'), 3);
-        
+    public function showByCategory( $categoryName)
+    { 
+        //1 er methode avec findby et findOneby
+        /*
+         $cat = $this->getDoctrine()->getRepository(Category::class)->findOneby(['title'=> $categoryName]);
+         $articles = $this->getDoctrine()->getRepository(Article::class)->findBy(array('category' => $cat), array('id' => 'DESC'), 3);
+        */
+
+        //2em Methode par getArticles
+         $cat = $this->getDoctrine()->getRepository(Category::class)->findOneby(['title'=> $categoryName]);
        
+        $articles = $cat->getArticles();
+
         return $this->render('blog/category.html.twig', [
             'category' => $categoryName ,
             'article' => $articles,
